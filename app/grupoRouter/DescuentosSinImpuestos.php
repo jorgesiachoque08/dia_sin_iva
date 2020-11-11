@@ -34,24 +34,21 @@ $app->post(
 );
 
 $app->post(
-  '/api/agregarCompraProducto',
-  function() use ($AuthController,$DescuentosSinImpuestosController,$request,$validador) {
+  '/api/agregarCompraProductos/{cod_tercero}/{cod_mp}/{cod_factura}',
+  function($cod_tercero,$cod_mp,$cod_factura) use ($AuthController,$DescuentosSinImpuestosController,$request,$validador) {
     $user = $AuthController->verificarToken();
     if ($user) {
       if($request->getJsonRawBody()){
         $_POST = (array)$request->getJsonRawBody();
       }
       
-      $validador->setRequeridos(["object_id_tercero"]);
+      $validador->setRequeridos(["compras"]);
       $message = ["message" => [
-          "object_id_tercero" => "object_id_tercero es requerida",
-          "object_id_factura" => "object_id_factura es requerida",
-          "cod_producto" => "cod_producto es requerida",
-          "cantidad" => "cantidad es requerida"
+          "compras" => "compras es requerida"
       ]];
       $validador->setMsjCamposRequerid($message);
       if($validador->Validando($_POST) === true){
-        return json_encode($DescuentosSinImpuestosController->agregarCompraProducto($_POST));
+        return json_encode($DescuentosSinImpuestosController->agregarCompraProductos($cod_tercero,$cod_mp,$cod_factura,$_POST));
       }
 
     }

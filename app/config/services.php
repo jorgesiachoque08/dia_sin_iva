@@ -3,10 +3,6 @@ use Phalcon\DI\FactoryDefault;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Mvc\Dispatcher;
-use Phalcon\Cache\Adapter\Redis;
-use Phalcon\Storage\SerializerFactory;
-use Phalcon\Storage\Exception;
-use GuzzleHttp\Client;
 
 
 $di = new FactoryDefault();
@@ -42,37 +38,6 @@ $di['db'] = function (){
     }
 };
 
-/* $di->set('apiAcercate', function(){
-    try {
-        $config = $this->getConfig();
-        $client  =  new  Client([ 'base_uri'  =>  $config->apiAcercate->url ]); 
-        return $client;
-    } catch (\Exception $ex) {
-        return $ex->getMessage();
-    }
-    
-
-}); */
-
-$di->set('cache', function(){
-    try {
-        // Create the Cache setting redis connection options
-        $serializerFactory = new SerializerFactory();
-        $cache = new Redis($serializerFactory,
-            [
-                "host"       => "127.0.0.1",
-                "port"       => 6379,
-                "auth"=>"vrahpK34f5OkvdVlJ9kFHIKkyS8fFxKu3YUmwsVdrCfT7VBelVQHFf7+xafgPkNdQIisn8v78/fiU2v5",
-                "persistent" => true,
-                "lifetime"=> 432000 //5 dias cada key en la cache
-            ]
-        );
-    } catch (Exception $e) {
-        return $e->getMessage();
-    }
-    return $cache;
-
-});
 
 $di->setShared(
     'response',
@@ -83,22 +48,5 @@ $di->setShared(
         return $response;
     }
   );
-/* 
-  $di->set('url', function() {
-    $url = new UrlResolver();
-    $config = $this->getConfig();
-    $url->setBaseUri($config->application->baseUri);
-    return $url;
-}); */
-
-
-/**
- * Correos por PHPMailer
- */
-/* $di['mail'] = function () {
-    $config = $this->getConfig();
-    $client = new Postmark\PostmarkClient($config->mail->token);
-    return $client;
-}; */
 
 
