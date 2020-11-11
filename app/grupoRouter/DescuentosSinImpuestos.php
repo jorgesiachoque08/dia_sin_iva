@@ -2,7 +2,7 @@
 // Validador Params
 /* $AuthController */
 $app->get(
-  '/api/obtener_dsi',
+  '/apiDiaSinIva/obtener_dsi',
   function() use ($AuthController,$DescuentosSinImpuestosController) {
     $user = $AuthController->verificarToken();
     if ($user) {
@@ -12,7 +12,7 @@ $app->get(
 );
 
 $app->post(
-  '/api/validarProducto/{cod_tercero}/{cod_mp}',
+  '/apiDiaSinIva/validarProducto/{cod_tercero}/{cod_mp}',
   function($cod_tercero,$cod_mp) use ($AuthController,$DescuentosSinImpuestosController,$request,$validador) {
     $user = $AuthController->verificarToken();
     if ($user) {
@@ -34,7 +34,7 @@ $app->post(
 );
 
 $app->post(
-  '/api/agregarCompraProductos/{cod_tercero}/{cod_mp}/{cod_factura}',
+  '/apiDiaSinIva/agregarCompraProductos/{cod_tercero}/{cod_mp}/{cod_factura}',
   function($cod_tercero,$cod_mp,$cod_factura) use ($AuthController,$DescuentosSinImpuestosController,$request,$validador) {
     $user = $AuthController->verificarToken();
     if ($user) {
