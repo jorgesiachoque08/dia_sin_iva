@@ -1,8 +1,5 @@
 {
     "require": {
-        "firebase/php-jwt": "^5.2",
-        "guzzlehttp/guzzle": "^7.0",
-        "phpmailer/phpmailer": "*",
-        "wildbit/postmark-php": "^4.0"
+        "guzzlehttp/guzzle": "^7.0"
     }
 }

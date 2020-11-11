@@ -5,6 +5,7 @@ use Phalcon\Http\Request;
 $request = new Request();
 
 //Controladores
+$AuthController = new AuthController();
 $DescuentosSinImpuestosController = new DescuentosSinImpuestosController();
 
 
